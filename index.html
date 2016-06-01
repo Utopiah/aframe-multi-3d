@@ -6,6 +6,7 @@
 <script src="https://ngokevin.github.io/aframe-firebase-component/basic/components/follow.js"></script>
 <script src="https://ngokevin.github.io/aframe-firebase-component/basic/components/random-position.js"></script>
 <script src="https://rawgit.com/ngokevin/aframe-text-component/master/dist/aframe-text-component.min.js"></script>
+<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v1.14.0/dist/aframe-extras.min.js"></script>
 </head>  
 <body>
     
@@ -56,7 +57,7 @@ AFRAME.registerComponent('random-color', {
 
       <!-- Synced avatar head. Rotates separately from body. -->
       <a-entity id="head" mixin="avatar-head"
-                camera look-controls wasd-controls
+                camera look-controls universal-controls
                 random-position="min: -10 0 -10; max: 10 0.2 10"
                 random-color=""
                 firebase-broadcast="components: mixin, position, rotation, color"></a-entity>
