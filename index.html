@@ -36,7 +36,7 @@
       <!-- Synced avatar head. Rotates separately from body. -->
       <a-entity id="head" mixin="avatar-head"
                 camera look-controls wasd-controls
-                random-position="min: -10 1.7 -10; max: 10 1.9 10"
+                random-position="min: -10 0 -10; max: 10 0.2 10"
                 firebase-broadcast="components: mixin, position, rotation"></a-entity>
 
       <!-- Synced avatar body. -->
@@ -46,37 +46,6 @@
                   position="0 -1 0"></a-entity>
       </a-entity>
 
-    <!-- Inviting to press VR, if available, backup solution until link traversal is supported -->
-    <a-plane position="0 2 3" color="#dbd7d7" scale="10 10 10"><a-animation attribute="scale" to="0 0 0" dur="5000"></a-animation></a-plane>
-    
-    <!-- <a-sky src="https://ucarecdn.com/0ebe0091-dbbd-4594-8735-03171e0b710b/zenhouse.jpg" cross-origin=""></a-sky>-->
-    <a-entity id="titletext" text="text: Room 1 - Primitive position" position="-2.5 3 0" material="color: black" scale="0.5 0.5 0.5"></a-entity>
-      
-    <a-entity id="interactivedemo"><!-- Start of interactive demo part-->
-     <a-cone id="DemoButtonIncrease" position="2 3.5 -5" radius-bottom="1" radius-top="0.1" color="pink" rotation="0 0 0">
-        <a-event name="mouseenter" scale="1.5 1.5 1.5" color="red"></a-event>
-        <a-event name="mouseleave" scale="1 1 1" color="pink"></a-event>
-      </a-cone>
-      <a-cone id="DemoButtonDecrease" position="2 1.5 -5" radius-bottom="1" radius-top="0.1" color="pink" rotation="180 0 0">
-        <a-event name="mouseenter" scale="1.5 1.5 1.5" color="red"></a-event>
-        <a-event name="mouseleave" scale="1 1 1" color="pink"></a-event>
-      </a-cone>
-      <a-entity id="positionplaceholder" text='text: <a-box color="orange" position="_ _ _ "></a-box>' position="-4.5 2 0" material="color: black" scale="0.5 0.5 0.5"></a-entity>
-      <a-entity id="textpos" text="text: 0 0 0" position="0.6 2 0" material="color: blue" scale="0.5 0.5 0.5"></a-entity>
-      <a-box id="codebackground" color="white" position="-1 2.2 -3" width="12"></a-box>
-      <a-box id="democube" color="orange" position="0 0 0"></a-box>
-    </a-entity><!-- end of interactive demo part-->
-      
-    <a-entity id="interface" rotation="10 0 0" position="0 4 0"><!-- Start of interface part-->
-      <a-entity id="email-save">
-        <a-entity id="savetext" text="text: Save" position="-2.5 0 0" material="color: black" scale="0.5 0.5 0.5"></a-entity
-      </a-entity>
-      <a-entity id="reset">
-        <a-entity id="resettext" text="text: Reset" position="2.5 0 0" material="color: black" scale="0.5 0.5 0.5"></a-entity>
-      </a-entity>
-      </a-entity>
-          </a-entity>
-    </a-entity><!-- end of interface part-->
    
     <a-entity id="exercise" position="8 -2 1" rotation="0 -90 0"><!-- Start of exercise part-->
       <a-entity id="lockeddoor">
