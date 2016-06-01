@@ -16,6 +16,7 @@ AFRAME.registerComponent('random-color', {
   schema: {},
 
   update: function () {
+    var el = this.el;
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
     for (var i = 0; i < 6; i++ ) {
