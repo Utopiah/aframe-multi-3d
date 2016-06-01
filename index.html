@@ -7,7 +7,28 @@
 <script src="https://ngokevin.github.io/aframe-firebase-component/basic/components/random-position.js"></script>
 <script src="https://rawgit.com/ngokevin/aframe-text-component/master/dist/aframe-text-component.min.js"></script>
 </head>  
-<body>   
+<body>
+    
+<script>
+AFRAME.registerComponent('random-color', {
+  dependencies: ['color'],
+
+  schema: {},
+
+  update: function () {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+
+    setTimeout(function () {
+      el.setAttribute('color', color );
+    });
+  }
+});
+</script>
+   
 <a-scene firebase="
     apiKey: AIzaSyB8C1Be7qhjJXHh_O9uQLAEcPyXyCXC8Ug;
     authDomain: aframemulti3d.firebaseapp.com;
@@ -37,6 +58,7 @@
       <a-entity id="head" mixin="avatar-head"
                 camera look-controls wasd-controls
                 random-position="min: -10 0 -10; max: 10 0.2 10"
+                random-color=""
                 firebase-broadcast="components: mixin, position, rotation"></a-entity>
 
       <!-- Synced avatar body. -->
