@@ -57,7 +57,7 @@ AFRAME.registerComponent('random-color', {
 
       <!-- Synced avatar head. Rotates separately from body. -->
       <a-entity id="head" mixin="avatar-head"
-                camera look-controls universal-controls
+                camera universal-controls
                 random-position="min: -10 0 -10; max: 10 0.2 10"
                 random-color=""
                 firebase-broadcast="components: mixin, position, rotation, color"></a-entity>
