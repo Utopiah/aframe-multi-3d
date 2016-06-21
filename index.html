@@ -8,9 +8,14 @@
 </head>
   <script src='http://tbaloo.com/public/aframe.min.js'></script> 
   <script src="https://rawgit.com/ngokevin/aframe-firebase-component/master/dist/aframe-firebase-component.min.js"></script>
+  <script src="https://rawgit.com/ngokevin/aframe-firebase-component/master/dist/aframe-firebase-component.min.js"></script>
 <body>
    
-<a-scene>
+<a-scene firebase="
+    apiKey: AIzaSyB8C1Be7qhjJXHh_O9uQLAEcPyXyCXC8Ug;
+    authDomain: aframemulti3d.firebaseapp.com;
+    databaseURL: https://aframemulti3d.firebaseio.com;
+    storageBucket: aframemulti3d.appspot.com">
   <a-assets>
       <!-- Using mixins to decrease amount of data send over the wire. -->
       <a-mixin id="avatar-head"
@@ -19,6 +24,7 @@
     </a-assets>		  
  -    <a-entity id="avatar" mixin="avatar-head"		
  -              camera		
+              firebase-broadcast="components: mixin, position, rotation"
  -              position="0 1 0">		
  -    </a-entity>
   <a-sky color='lightblue'></a-sky>
