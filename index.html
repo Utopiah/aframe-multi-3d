@@ -9,9 +9,21 @@
   <script src='http://tbaloo.com/public/aframe.min.js'></script>
 <body>
    
-<a-scene> 
+<a-scene>
+
+<a-assets>
+      <!-- Using mixins to decrease amount of data send over the wire. -->
+      <a-mixin id="avatar-head"
+              geometry="primitive: box; depth: 0.3; height: 0.3; width: 0.3"
+              material="color: #222"></a-mixin>
+    </a-assets>
+
+    <a-entity id="avatar" mixin="avatar-head"
+              camera
+              position="0 0 0">
+    </a-entity>
   <a-sky color='lightblue'></a-sky>
-  <a-box></a-box>
+  <a-box position='0 0 5'></a-box>
 
 </a-scene>
 
