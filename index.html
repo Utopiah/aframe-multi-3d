@@ -8,6 +8,7 @@
 </head>
   <script src='http://tbaloo.com/public/aframe.min.js'></script> 
   <script src="https://rawgit.com/ngokevin/aframe-firebase-component/master/dist/aframe-firebase-component.min.js"></script>
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v1.16.3/dist/aframe-extras.min.js"></script>
 <body>
    
 <a-scene firebase="
@@ -23,6 +24,11 @@
               material="color: #222"></a-mixin>
     </a-assets>
 
+    <a-entity id="avatar" mixin="avatar-head"
+              camera universal-controls
+              firebase-broadcast="components: mixin, position, rotation"
+              position="0 1 0">
+    </a-entity>
 </a-scene>
 
 </body>
