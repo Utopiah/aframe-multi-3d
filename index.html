@@ -1,201 +1,29 @@
-<head>   
-<title>My A-Frame Scene
-</title>
-<script src="https://aframe.io/releases/0.2.0/aframe.min.js"></script>
-<script src="https://rawgit.com/ngokevin/aframe-firebase-component/master/dist/aframe-firebase-component.min.js"></script>
-<script src="https://ngokevin.github.io/aframe-firebase-component/basic/components/follow.js"></script>
-<script src="https://ngokevin.github.io/aframe-firebase-component/basic/components/random-position.js"></script>
-<script src="https://rawgit.com/ngokevin/aframe-text-component/master/dist/aframe-text-component.min.js"></script>
-<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v1.14.0/dist/aframe-extras.min.js"></script>
-</head>  
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+  <script src='http://tbaloo.com/public/aframe.min.js'></script> 
+  <script src="https://rawgit.com/ngokevin/aframe-firebase-component/master/dist/aframe-firebase-component.min.js"></script>
 <body>
-    
-<script>
-AFRAME.registerComponent('random-color', {
-  dependencies: ['color'],
-
-  schema: {},
-
-  update: function () {
-    var el = this.el;
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-
-    setTimeout(function () {
-      el.setAttribute('color', color );
-    });
-  }
-});
-</script>
    
 <a-scene firebase="
     apiKey: AIzaSyB8C1Be7qhjJXHh_O9uQLAEcPyXyCXC8Ug;
     authDomain: aframemulti3d.firebaseapp.com;
     databaseURL: https://aframemulti3d.firebaseio.com;
-    storageBucket: aframemulti3d.appspot.com">     
-      <a-assets>
-        <a-mixin id="avatar-head"
-                geometry="primitive: box; depth: 0.3; height: 0.3; width: 0.3"></a-mixin>
-        <a-mixin id="avatar-body"
-                 geometry="primitive: cone; height: 1.5; radiusTop: 0.1; radiusBottom: 0.4"
-                 material="color: #222"></a-mixin>
-      <!-- cf also https://aframe.io/docs/core/asset-management-system.html -->
-      <a-mixin id="smalltitle" position="-2 2.5 1" material="color: black" scale="0.2 0.2 0.2"></a-mixin>
-        <!-- cf https://aframe.io/docs/core/mixin.html -->
-            
-      <a-asset-item id="mountain-mtl" src="https://ucarecdn.com/22282159-c9fe-4f1a-a23b-aadff999a4df/"></a-asset-item>
-      <a-asset-item id="mountain-obj" src="https://ucarecdn.com/ca4a2cd8-ae99-4a59-86a2-1895836bbfe9/"></a-asset-item>
-      
-      <a-asset-item id="tree-mtl" src="https://ucarecdn.com/5ca714c3-6ce5-471e-87b5-a57e8ef9bd26/"></a-asset-item>
-      <a-asset-item id="tree-obj" src="https://ucarecdn.com/d22245e0-5b7e-4e4f-84c4-a673b7b8e75c/"></a-asset-item>
-      
-      <a-asset-item id="self" src="https://ucarecdn.com/fbcb4698-a381-4c48-a1cd-b738d0fee1be/"></a-asset-item>
-      </a-assets>
+    storageBucket: aframemulti3d.appspot.com">
+  <a-sky color='blue'></a-sky>
+  <a-box></a-box>   <a-assets>
+      <!-- Using mixins to decrease amount of data send over the wire. -->
+      <a-mixin id="avatar-head"
+              geometry="primitive: box; depth: 0.3; height: 0.3; width: 0.3"
+              material="color: #222"></a-mixin>
+    </a-assets>
 
-      <!-- Synced avatar head. Rotates separately from body. -->
-      <a-entity id="head" mixin="avatar-head"
-                camera universal-controls
-                random-position="min: -10 0 -10; max: 10 0.2 10"
-                random-color=""
-                firebase-broadcast="components: mixin, position, rotation, color"></a-entity>
+</a-scene>
 
-      <!-- Synced avatar body. -->
-      <a-entity id="body" firebase-broadcast="components: position" follow="[camera]">
-        <a-entity mixin="avatar-body"
-                  firebase-broadcast="components: mixin, position"
-                  position="0 -1 0"></a-entity>
-      </a-entity>
-
-   
-    <a-entity id="exercise" position="8 -2 1" rotation="0 -90 0"><!-- Start of exercise part-->
-      <a-entity id="lockeddoor">
-        <a-entity id="doortext" text="text: Locked door" position="0.5 5 3" material="color: black" scale="0.5 0.5 0.5"></a-entity>
-        <a-box id="door" color="brown" position="0 3 -3" height="4" width="3" rotation="0 0 0">
-          <a-animation attribute="rotation" begin="opendoor" to="0 90 0" duration="10000"></a-animation>
-        </a-box>
-        <a-box id="doorlock" color="red" position="0 3 -2.5" height="1" width="4" material="opacity: 1">
-          <a-animation attribute="material.opacity" begin="fade" to="0"></a-animation>
-        </a-box>
-      <a-entity id="expositionplaceholder" text='text: <a-box color="yellow" position="_ _ _ "></a-box>' position="-1 0 3" material="color: black" scale="0.5 0.5 0.5"></a-entity>
-      <a-entity id="extextpos" text="text: 0 0 0" position="4 0 3" material="color: blue" scale="0.5 0.5 0.5"></a-entity>
-        <a-entity id="titletext" text="text: Target" position="6 2 -3" material="color: yellow" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
-        <a-box id="exdemocube" color="yellow" position="7 1 3"></a-box>
-        <a-box id="targetcube" color="orange" position="7 1 -3"></a-box>
-        <a-cone id="ExerciseButtonDecrease" position="2 1.5 -5" radius-bottom="1" radius-top="0.1" color="pink" rotation="180 0 0">
-          <a-event name="mouseenter" scale="1.5 1.5 1.5" color="red"></a-event>
-          <a-event name="mouseleave" scale="1 1 1" color="pink"></a-event>
-        </a-cone>
-        <a-cone id="ExerciseButtonIncrease" position="2 3.5 -5" radius-bottom="1" radius-top="0.1" color="pink" rotation="0 0 0">
-          <a-event name="mouseenter" scale="1.5 1.5 1.5" color="red"></a-event>
-          <a-event name="mouseleave" scale="1 1 1" color="pink"></a-event>
-        </a-cone>
-        </a-entity><!-- end of exercise part-->
-
-      <!-- decor -->
-          <a-entity position="0 -1 0" scale="1 1 1" rotation="0 0 0">
-      <a-sky color="#05c5de"></a-sky>
-
-      
-      <a-obj-model position="0 0 1" src="#self-obj" mtl="#self-mtl"></a-obj-model>
-      
-      <a-obj-model position="0 3 -10" src="#tree-obj" color="green"></a-obj-model>
-      <a-obj-model position="12 3.8 -1" src="#tree-obj" color="green"></a-obj-model>
-      <a-obj-model position="17 3.8 -1" src="#tree-obj" color="green"></a-obj-model>
-      <a-obj-model position="16.5 3.8 1" src="#tree-obj" color="green"></a-obj-model>
-      <a-obj-model position="17.5 4 3" src="#tree-obj" color="green"></a-obj-model>
-      
-      <a-obj-model position="-17 2.4 -1" src="#tree-obj" color="green"></a-obj-model>
-      <a-obj-model position="-16.5 2 1" src="#tree-obj" color="green"></a-obj-model>
-      <a-obj-model position="-17.5 3 3" src="#tree-obj" color="green"></a-obj-model>
-      
-      <a-collada-model rotation="0 160 0" position="0 3 0"  scale="0.5 0.5 0.5" src="#self">
-        <a-animation attribute="rotation"
-               dur="20000"
-               fill="forwards"
-               to="0 -360 0"
-               repeat="indefinite"></a-animation>
-      </a-collada-model>
-      
-      <a-obj-model  position="0 -1 0" scale="10 10 10" src="#mountain-obj" mtl="#mountain-mtl"></a-obj-model>
-    </a-entity>
-      <!-- end of decor -->
-</a-scene>     <script>
-      var targetpos_z = -3;
-      var doorlocked = true;
-      var scene = document.querySelector('a-scene');
-      if (scene.hasLoaded) {
-        run();
-      } else {
-        scene.addEventListener('loaded', run);
-      }
-
-      function run () {
-        var item = document.getElementById('door');
-        item.addEventListener('mouseenter', function() {
-          if (!doorlocked){
-             window.open("https://output.jsbin.com/luheku","_self");
-          }
-        });
-        var item = document.getElementById('resettext');
-        item.addEventListener('mouseenter', function() {
-             window.open("https://output.jsbin.com/dibonoj","_self");
-        });
-        
-        var item = document.getElementById('savetext');
-        item.addEventListener('mouseenter', function() {
-             var learnedcode = encodeURIComponent('{a-box color="yellow" position='+document.getElementById('textpos').getAttribute('text').text+'"}{/a-box}');
-             window.open('mailto:fabien-services@benetou.fr?subject=VC Inception School - Room1&body=continue https://output.jsbin.com/dibonoj code, you learned '+learnedcode+' (for safety reason the inferior/superior signs were replaced by {/}) and personalize using your own code and lessons you learned https://jsbin.com/dibonoj/edit?html,output',"_self");
-        });
-        var democube = document.getElementById('democube');
-        var item = document.getElementById('DemoButtonIncrease');
-        item.addEventListener('mouseenter', function() {
-             var pos = democube.getAttribute('position');
-             democube.setAttribute('position', { x: ++pos.x, y: pos.y, z: pos.z });
-             document.getElementById('textpos').setAttribute('text', 'text: ' + pos.x + ' ' + pos.y + ' ' + pos.z);
-        });
-
-        var item = document.getElementById('DemoButtonDecrease');
-        item.addEventListener('mouseenter', function() {
-             var pos = democube.getAttribute('position');
-             democube.setAttribute('position', { x: --pos.x, y: pos.y, z: pos.z });
-             document.getElementById('textpos').setAttribute('text', 'text: ' + pos.x + ' ' + pos.y + ' ' + pos.z);
-        });
-        
-        var exdemocube = document.getElementById('exdemocube');
-        var item = document.getElementById('ExerciseButtonIncrease');
-        item.addEventListener('mouseenter', function() {
-             var pos = exdemocube.getAttribute('position');
-             console.log("pos:", pos, "targetpos_z:", targetpos_z);
-             exdemocube.setAttribute('position', { x: pos.x, y: pos.y, z: ++pos.z });
-             document.getElementById('extextpos').setAttribute('text', 'text: ' + pos.x + ' ' + pos.y + ' ' + pos.z);
-             
-             if (pos.z == targetpos_z){
-               document.querySelector('#door').emit('opendoor');
-               document.querySelector('#doorlock').emit('fade');
-               doorlocked = false;
-               document.getElementById('doortext').setAttribute('text', 'text: Door unlocked!');
-               document.getElementById('door').setAttribute('color', 'green');               
-             }
-        });
-
-        var item = document.getElementById('ExerciseButtonDecrease');
-        item.addEventListener('mouseenter', function() {
-             var pos = exdemocube.getAttribute('position');
-             exdemocube.setAttribute('position', { x: pos.x, y: pos.y, z: --pos.z });
-             document.getElementById('extextpos').setAttribute('text', 'text: ' + pos.x + ' ' + pos.y + ' ' + pos.z);
-             
-             if (pos.z == targetpos_z){
-               document.querySelector('#door').emit('opendoor');
-               document.querySelector('#doorlock').emit('fade');
-               doorlocked = false;
-               document.getElementById('doortext').setAttribute('text', 'text: Door unlocked!');
-               document.getElementById('door').setAttribute('color', 'green');               
-             }
-        });
-      }
-      
-    </script>
 </body>
+</html>
